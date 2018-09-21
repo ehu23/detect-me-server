@@ -2,6 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex');
+
+const postgres = knex({
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',  //127.0.0.1 is localhost
+      user : 'eddie',
+      password : '',
+      database : 'smart-brain'
+    }
+  });
+
+console.log(postgres.select('*').from('users'));
 
 const app = express();
 app.use(bodyParser.json());
@@ -60,7 +73,7 @@ app.post('/register', (req, res) => {
     res.json(database.users[database.users.length-1])
 });
 
-app.get('/profile/:id', (req, res) => {
+app.get('/profile/:id', (req, res) => { //not implemented w/ frontend
     const { id } = req.params;
     let found = false;
     database.users.forEach(user => {
