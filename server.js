@@ -28,9 +28,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send(database.users);
-});
+app.get('/', (req, res) => {res.send('server is up!')} );
 
 app.post('/signin', signin.handleSignin(db, bcrypt)); //another way of syntax. Run function with db and bcrypt, then when the post comes, pass it two more parameters - req, res (implied).
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)}); //called dependency injection into the function
