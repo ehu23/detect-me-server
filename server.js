@@ -36,6 +36,7 @@ app.post('/signin', signin.handleSignin(db, bcrypt)); //another way of syntax. R
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)}); //called dependency injection into the function
 app.get('/profile/:id', (req, res) => {profile.handleProfile(req, res, db)}); //not implemented w/ frontend. For future developments.
 app.put('/image', (req, res) => {image.handleImage(req, res, db)}); 
+app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)}); 
 
 app.listen(3001, () => {
     console.log('app is running on port 3001');
