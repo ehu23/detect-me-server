@@ -14,9 +14,9 @@ const db = knex({
     }
   });
 
-db.select('*').from('users').then(data => {
-    console.log(data);
-});
+// db.select('*').from('users').then(data => { //to test if db is connected/working
+//     console.log(data);
+// });
 
 const app = express();
 app.use(bodyParser.json());
@@ -65,7 +65,7 @@ app.post('/signin', (req, res) => {
 app.post('/register', (req, res) => {
     const {email, name, password} = req.body; 
     db('users')
-        .returning('*')
+        .returning('*') //specifies what should be returned by .insert
         .insert({
             email: email,
             name: name,
@@ -76,33 +76,31 @@ app.post('/register', (req, res) => {
     .catch(err => res.status(400).json('unable to register')) //in case theres an error
 });
 
-app.get('/profile/:id', (req, res) => { //not implemented w/ frontend
+app.get('/profile/:id', (req, res) => { //not implemented w/ frontend. For future developments.
     const { id } = req.params;
-    let found = false;
-    database.users.forEach(user => {
-        if (user.id === id) {
-            found = true;
-            return res.json(user);
+    db.select('*').from('users')
+    .where({
+        id: id
+    })
+    .then(user => {
+        if (user.length) { //if we actually found a user
+            res.json(user[0])
+        } else { //user doesn't exist
+            res.status(400).json('no user found')
         }
-    });
-    if (!found) {
-    return res.status(404).json('no such user');
-    }
+    })
+    .catch(err => res.status(400).json('error getting user'))
 });
 
 app.put('/image', (req, res) => {
     const { id } = req.body;
-    let found = false;
-    database.users.forEach(user => {
-        if (user.id === id) {
-            found = true;
-            user.entries++;
-            return res.json(user.entries);
-        }
-    });
-    if (!found) {
-        return res.status(404).json('no such user');
-    }
+    db('users').where('id', '=', id)
+    .increment('entries', 1)
+    .returning('entries')
+    .then(entries => {
+        res.json(entries[0]);
+    })
+    .catch(err => res.status(400).json('unable to get entries'))
 }); 
 
 
