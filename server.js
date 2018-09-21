@@ -12,7 +12,7 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-      connectionString : process.env.DATABASE_URL,  //127.0.0.1 is localhost
+      connectionString : process.env.DATABASE_URL,  //127.0.0.1 is localhost. connectionString instead of host for heroku.
       ssl: true
     }
   });
