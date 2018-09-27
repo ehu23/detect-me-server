@@ -34,7 +34,7 @@ app.get('/profile/:id', (req, res) => {profile.handleProfile(req, res, db)}); //
 app.put('/image', (req, res) => {image.handleImage(req, res, db)}); 
 app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)}); 
 
-const PORT = process.env.PORT;
-app.listen(PORT || 3001, () => {
+const PORT = process.env.PORT; //heroku puts it the port automatically into this variable
+app.listen(PORT || 3001, () => { //default is 3001 if PORT is not specified.
     console.log(`app is running on port ${PORT}`);
 });
