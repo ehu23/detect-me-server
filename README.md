@@ -1,7 +1,7 @@
 README
 
-This is the node server to the face finder AI web app. Express is used as a framework for node. Knex is used as the SQL query builder for the PostgreSQL database this is connected to.
-
+This is the node server to the face detecting AI web app. Express is used as a framework for node. Knex is used as the SQL query builder for the PostgreSQL database this is connected to.
+Currently deployed on: https://rocky-escarpment-90953.herokuapp.com, with the front end web app on: https://detect-me.herokuapp.com 
 
 Some things to keep in mind:
 
@@ -10,3 +10,5 @@ Some things to keep in mind:
     2. Clarifai's API KEY is currently invoked through the API_KEY_CLARIFAI environment variable.
 
     3. Current setup is run on heroku.
+
+    4. Don't forget to "npm install" first
