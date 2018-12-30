@@ -17,6 +17,17 @@ const db = knex({
       ssl: true // Needed for heroku
     }
   });
+/*
+To Connect to local datastore using Knex, just change the connection property above to:
+
+    connection: {
+        host: '127.0.0.1',
+        user: 'DATABASE USER, i.e. eddie',
+        password: 'PASSWORD TO THE DATABASE',
+        database: 'DATABASE NAME'
+    }
+
+ */
 
 /* To quickly test if db is connected with KNEX:
 // KNEX query building syntax returns a promise. But since we are not working through HTTPS, we do not need to convert th JSON. Just returns whatever is requested in an array.

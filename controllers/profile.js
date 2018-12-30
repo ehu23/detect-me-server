@@ -1,3 +1,5 @@
+// Idea: return back the user's data. Currently not used on Detect Me AI.
+
 const handleProfile = (req, res, db) => {
     const { id } = req.params;
 
