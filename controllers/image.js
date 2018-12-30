@@ -15,13 +15,14 @@ app.models
 
 const handleImage = (req, res, db) => {
     const { id } = req.body;
+
     db('users').where('id', '=', id)
     .increment('entries', 1)
-    .returning('entries')
+    .returning('entries') // Still Part of query builder command, will return entries after of the rows that match the conditional 'where', which should only be one row since ID's are unique.!
     .then(entries => {
-        res.json(entries[0]);
+        res.json(entries[0]); // Remember, it returns in array-form
     })
-    .catch(err => res.status(400).json('unable to get entries'))
+    .catch(err => res.status(400).json('unable to get entry count'))
 }
 
 module.exports = {
